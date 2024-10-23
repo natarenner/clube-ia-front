@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/select';
 import { Categories } from '@/app/types/categories';
 import { Citys } from '@/app/types/citys';
-import { env } from '@/lib/zod-env';
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -51,12 +50,12 @@ export default function CreateAiForm() {
 
         const instanceName = `${data.city.toLowerCase()}-${data.category.replace(/\s+/g, '-').toLowerCase()}-${data.companyName.replace(/\s+/g, '-').toLowerCase()}-${randomId}`;
 
-        const url = `${env.STARKS_EVO_BASE_URL}/instance/create`;
+        const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/instance/create`;
         //const url = `/api/test`;
 
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${env.STARKS_EVO_API_KEY}`
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STARKS_EVO_API_KEY!}`
         };
 
         const payload = {

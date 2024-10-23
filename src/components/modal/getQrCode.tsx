@@ -4,7 +4,6 @@ import { useToast } from '@/hooks/use-toast';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '../ui/button';
-import { env } from '@/lib/zod-env';
 
 type InstanceResponse = {
     code: string;
@@ -44,11 +43,11 @@ export const GetQrCode: React.FC = () => {
     const fetchQrCode = async () => {
         setSubmitting(true);
         try {
-            const url = `${env.STARKS_EVO_BASE_URL}/instance/refresh/${instanceName}`;
+            const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/instance/refresh/${instanceName}`;
 
             const headers = {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${env.STARKS_EVO_API_KEY}`
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_STARKS_EVO_API_KEY!}`
             };
             const response = await fetch(url, {
                 method: 'GET',
@@ -82,11 +81,11 @@ export const GetQrCode: React.FC = () => {
     const verifyConnection = async () => {
         setVerifying(true);
         try {
-            const url = `${env.STARKS_EVO_BASE_URL}/instance/status/${instanceName}`;
+            const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/instance/status/${instanceName}`;
 
             const headers = {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${env.STARKS_EVO_API_KEY}`
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_STARKS_EVO_API_KEY!}`
             };
             const response = await fetch(url, {
                 method: 'GET',
