@@ -73,17 +73,19 @@ export default function CreateAiForm() {
             });
 
             if (!response.ok) {
+                console.error(`Falha ao criar a instancia, status: ${response.status}`)
                 throw new Error(`Falha ao criar a instancia, status: ${response.status}`);
             }
 
             setSubmitting(false);
             router.push(`/admin/connect?id=${instanceName}`);
         } catch (error) {
+            console.error(error)
             setSubmitting(false);
             toast({
                 variant: 'destructive',
                 title: 'Erro ao criar instância.',
-                description: 'Ocorreu um erro ao tentar criar a instância. Por favor, tente novamente.'
+                description: `Ocorreu um erro ao tentar criar a instância. Por favor, tente novamente.: ${error}`
             });
             throw new Error(`Failed to fetch, error: ${error}`);
         }
