@@ -4,8 +4,6 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const instance = searchParams.get('instance');
 
-  console.log(instance);
-
   const state = 'open';
 
   return NextResponse.json({ state }, { status: 200 });

@@ -7,8 +7,6 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const instance = searchParams.get('instance');
 
-    console.log(instance); // Agora você pode acessar o parâmetro 'instance'
-
     const url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example';
 
     const response = await fetch(url);
