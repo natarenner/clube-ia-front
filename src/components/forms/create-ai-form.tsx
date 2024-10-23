@@ -51,12 +51,12 @@ export default function CreateAiForm() {
 
         const instanceName = `${data.city.toLowerCase()}-${data.category.replace(/\s+/g, '-').toLowerCase()}-${data.companyName.replace(/\s+/g, '-').toLowerCase()}-${randomId}`;
 
-        const url = `${process.env.STARKS_EVO_BASE_URL}/instance/create`;
+        const url = `${env.STARKS_EVO_BASE_URL}/instance/create`;
         //const url = `/api/test`;
 
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.STARKS_EVO_API_KEY!}`
+            Authorization: `Bearer ${env.STARKS_EVO_API_KEY}`
         };
 
         const payload = {

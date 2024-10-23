@@ -5,8 +5,9 @@ const envSchema = z.object({
   NEXTAUTH_SECRET: z.string().min(1),
   SECRET_KEY: z.string().min(1),
   SESSION_COOKIE_NAME: z.string().min(1),
-  NEXT_PUBLIC_API_URL: z.string().min(1)
-  //STARKS_EVO_API_KEY: z.string().min(1),
+  NEXT_PUBLIC_API_URL: z.string().min(1),
+  STARKS_EVO_API_KEY: z.string().min(1),
+  STARKS_EVO_BASE_URL: z.string().min(1),
 });
 
 export const env = envSchema.parse(process.env);
