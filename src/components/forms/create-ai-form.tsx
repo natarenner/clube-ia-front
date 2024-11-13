@@ -49,7 +49,7 @@ export default function CreateAiForm() {
 
     const instanceName = `${data.city.toLowerCase()}-${data.type.replace(/\s+/g, '-').toLowerCase()}-${data.name.replace(/\s+/g, '-').toLowerCase()}-${randomId}`;
 
-    const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/instance/create`;
+    const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/wpp/instance/create`;
 
     const headers = {
       'Content-Type': 'application/json',

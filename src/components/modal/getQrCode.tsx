@@ -43,7 +43,7 @@ export const GetQrCode: React.FC = () => {
   const fetchQrCode = async () => {
     setSubmitting(true);
     try {
-      const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/instance/refresh/${instanceName}`;
+      const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/wpp/instance/refresh/${instanceName}`;
 
       const headers = {
         'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export const GetQrCode: React.FC = () => {
   const verifyConnection = async () => {
     setVerifying(true);
     try {
-      const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/instance/status/${instanceName}`;
+      const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/wpp/instance/status/${instanceName}`;
 
       const headers = {
         'Content-Type': 'application/json',
