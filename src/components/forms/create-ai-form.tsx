@@ -60,8 +60,8 @@ export default function CreateAiForm() {
       name: instanceName,
       phoneNumber: data.phoneNumber,
       type: data.type,
-      aiName: data.aiName,
-      city: data.city
+      city: data.city,
+      aiName: data.aiName
     };
 
     try {
