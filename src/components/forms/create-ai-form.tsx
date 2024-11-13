@@ -1,5 +1,4 @@
 'use client';
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -22,9 +21,9 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
-  companyName: z.string().min(1, 'O nome da empresa é obrigatório.'),
-  whatsapp: z.string().min(1, { message: 'O WhatsApp é obrigatório.' }),
-  category: z.nativeEnum(Categories, {
+  name: z.string().min(1, 'O nome da empresa é obrigatório.'),
+  phoneNumber: z.string().min(1, { message: 'O Whatsapp é obrigatório.' }),
+  type: z.nativeEnum(Categories, {
     errorMap: () => ({ message: 'A categoria é obrigatória.' })
   }),
   city: z.nativeEnum(Citys, { errorMap: () => ({ message: 'A cidade é obrigatória.' }) }),
@@ -48,10 +47,9 @@ export default function CreateAiForm() {
 
     const randomId = Math.floor(10000000 + Math.random() * 90000000).toString();
 
-    const instanceName = `${data.city.toLowerCase()}-${data.category.replace(/\s+/g, '-').toLowerCase()}-${data.companyName.replace(/\s+/g, '-').toLowerCase()}-${randomId}`;
+    const instanceName = `${data.city.toLowerCase()}-${data.type.replace(/\s+/g, '-').toLowerCase()}-${data.name.replace(/\s+/g, '-').toLowerCase()}-${randomId}`;
 
     const url = `${process.env.NEXT_PUBLIC_STARKS_EVO_BASE_URL!}/instance/create`;
-    //const url = `/api/test`;
 
     const headers = {
       'Content-Type': 'application/json',
@@ -60,8 +58,8 @@ export default function CreateAiForm() {
 
     const payload = {
       name: instanceName,
-      phoneNumber: data.whatsapp,
-      category: data.category
+      phoneNumber: data.phoneNumber,
+      type: data.type
     };
 
     try {
@@ -98,29 +96,29 @@ export default function CreateAiForm() {
           {/* Nome da Empresa */}
           <FormField
             control={form.control}
-            name="companyName"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <Label htmlFor="companyName">Nome da Empresa</Label>
+                <Label htmlFor="name">Nome da Empresa</Label>
                 <FormControl>
-                  <Input id="companyName" placeholder="Digite o nome da empresa" {...field} />
+                  <Input id="name" placeholder="Digite o nome da empresa" {...field} />
                 </FormControl>
-                <FormMessage>{form.formState.errors.companyName?.message}</FormMessage>
+                <FormMessage>{form.formState.errors.name?.message}</FormMessage>
               </FormItem>
             )}
           />
 
-          {/* WhatsApp */}
+          {/* phoneNumber */}
           <FormField
             control={form.control}
-            name="whatsapp"
+            name="phoneNumber"
             render={({ field }) => (
               <FormItem>
-                <Label htmlFor="whatsapp">WhatsApp</Label>
+                <Label htmlFor="phoneNumber">Whatsapp</Label>
                 <FormControl>
-                  <Input id="whatsapp" placeholder="Digite o número do WhatsApp" {...field} />
+                  <Input id="phoneNumber" placeholder="Digite o número de Whatsapp" {...field} />
                 </FormControl>
-                <FormMessage>{form.formState.errors.whatsapp?.message}</FormMessage>
+                <FormMessage>{form.formState.errors.phoneNumber?.message}</FormMessage>
               </FormItem>
             )}
           />
@@ -128,23 +126,27 @@ export default function CreateAiForm() {
           {/* Categoria do Negócio */}
           <FormField
             control={form.control}
-            name="category"
+            name="type"
             render={({ field }) => (
               <FormItem>
-                <Label htmlFor="category">Categoria do Negócio</Label>
+                <Label htmlFor="type">Categoria do Negócio</Label>
                 <FormControl>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione a categoria" />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value={Categories.Food}>Alimentação</SelectItem>
+                      <SelectItem value={Categories.Drinks}>Bebidas</SelectItem>
+                      <SelectItem value={Categories.Commerce}>Comércio</SelectItem>
                       <SelectItem value={Categories.Pharmacy}>Farmácia</SelectItem>
                       <SelectItem value={Categories.Market}>Mercado</SelectItem>
-                      <SelectItem value={Categories.Restaurant}>Restaurante</SelectItem>
+                      <SelectItem value={Categories.PetShop}>PetShop</SelectItem>
+                      <SelectItem value={Categories.Services}>Serviços</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormMessage>{form.formState.errors.category?.message}</FormMessage>
+                <FormMessage>{form.formState.errors.type?.message}</FormMessage>
               </FormItem>
             )}
           />
@@ -162,9 +164,22 @@ export default function CreateAiForm() {
                       <SelectValue placeholder="Selecione a cidade" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value={Citys.Santos}>Santos</SelectItem>
-                      <SelectItem value={Citys.SP}>São Paulo</SelectItem>
-                      <SelectItem value={Citys.RJ}>Rio de Janeiro</SelectItem>
+                      <SelectContent>
+                        <SelectItem value={Citys.Carapicuiba}>Carapicuíba</SelectItem>
+                        <SelectItem value={Citys.Chapeco}>Chapecó</SelectItem>
+                        <SelectItem value={Citys.CaxiasSul}>Caxias do Sul</SelectItem>
+                        <SelectItem value={Citys.Goiania}>Goiânia</SelectItem>
+                        <SelectItem value={Citys.Itanhaem}>Itanhaém</SelectItem>
+                        <SelectItem value={Citys.JaraguaSul}>Jaraguá do Sul</SelectItem>
+                        <SelectItem value={Citys.Osasco}>Osasco</SelectItem>
+                        <SelectItem value={Citys.RJ}>Rio de Janeiro</SelectItem>
+                        <SelectItem value={Citys.Santos}>Santos</SelectItem>
+                        <SelectItem value={Citys.SPZonaLeste}>São Paulo Zona Leste</SelectItem>
+                        <SelectItem value={Citys.SPZonaNorte}>São Paulo Zona Norte</SelectItem>
+                        <SelectItem value={Citys.SPZonaOeste}>São Paulo Zona Oeste</SelectItem>
+                        <SelectItem value={Citys.SPZonaSul}>São Paulo Zona Sul</SelectItem>
+                        <SelectItem value={Citys.TaboaoSerra}>Taboão da Serra</SelectItem>
+                      </SelectContent>
                     </SelectContent>
                   </Select>
                 </FormControl>
