@@ -58,6 +58,7 @@ export default function CreateAiForm() {
 
     const payload = {
       name: instanceName,
+      companyName: data.name,
       phoneNumber: data.phoneNumber,
       type: data.type,
       city: data.city,
